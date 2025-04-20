@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="card">
+    <div class="top-section">
+      <div class="cap-icon">🎓</div>
+      <div class="role-selector">
+        <input type="radio" id="student" name="role" checked />
+        <input type="radio" id="teacher" name="role" />
+        
+        <label for="student" class="role-button">🎓 Student</label>
+        <label for="teacher" class="role-button">👨‍🏫 Teacher</label>
+      </div>
+    </div>
+
+    <h1>Welcome!</h1>
+    <p>Please select whether you are a Student or a Teacher so I can customize your experience.</p>
+
+    <div class="frame-content student-frame">
+      <p>This is the Student view.</p>
+    </div>
+    <div class="frame-content teacher-frame">
+      <p>This is the Teacher view.</p>
+    </div>
+
+    <a href="login.html" class="get-started">GET STARTED</a>
+  </div>
+</body>
+</html>
+
+
