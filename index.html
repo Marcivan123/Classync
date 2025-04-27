@@ -11,11 +11,14 @@
     <div class="top-section">
       <div class="cap-icon">🎓</div>
       <div class="role-selector">
-        <input type="radio" id="student" name="role" checked />
-        <input type="radio" id="teacher" name="role" />
-        
-        <label for="student" class="role-button">🎓 Student</label>
-        <label for="teacher" class="role-button">👨‍🏫 Teacher</label>
+        <div class="role-option">
+          <input type="radio" id="student" name="role" checked />
+          <label for="student" class="role-button">🎓 Student</label>
+        </div>
+        <div class="role-option">
+          <input type="radio" id="teacher" name="role" />
+          <label for="teacher" class="role-button">👨‍🏫 Teacher</label>
+        </div>
       </div>
     </div>
 
@@ -29,9 +32,57 @@
       <p>This is the Teacher view.</p>
     </div>
 
-    <a href="login.html" class="get-started">GET STARTED</a>
+    <a href="#" class="get-started" onclick="startApp(event)">GET STARTED</a>
   </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="spinner-text">Loading...</div>
+  </div>
+
+  <script>
+    const studentRadio = document.getElementById('student');
+    const teacherRadio = document.getElementById('teacher');
+    const studentFrame = document.querySelector('.student-frame');
+    const teacherFrame = document.querySelector('.teacher-frame');
+
+    // Show/hide frames based on selection
+    studentRadio.addEventListener('change', () => {
+      studentFrame.style.display = 'block';
+      teacherFrame.style.display = 'none';
+    });
+
+    teacherRadio.addEventListener('change', () => {
+      teacherFrame.style.display = 'block';
+      studentFrame.style.display = 'none';
+    });
+
+    function startApp(event) {
+  event.preventDefault(); // Stop the link from jumping immediately
+
+  const overlay = document.getElementById('loadingOverlay');
+  overlay.style.display = 'flex';
+
+  // Wait around 1.2 seconds before going to login page
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 1200);
+}
+
+
+    // Show correct frame on page load
+    window.onload = () => {
+      if (studentRadio.checked) {
+        studentFrame.style.display = 'block';
+      } else {
+        teacherFrame.style.display = 'block';
+      }
+    }
+  </script>
 </body>
 </html>
+
+
 
 

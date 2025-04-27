@@ -39,43 +39,41 @@ body {
 
 .role-selector {
   display: flex;
-  border-radius: 12px;
-  overflow: hidden;
-  background: white;
-  margin: 0 auto;
-  width: fit-content;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  gap: 10px;
+  margin: 16px auto;
 }
 
-.role-selector input {
+.role-option {
+  position: relative;
+}
+
+.role-option input {
   display: none;
 }
 
 .role-button {
-  flex: 1;
-  padding: 10px 16px;
-  border: none;
-  background: transparent;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: #e0e0e0;
+  color: #333;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 
-/* Only apply green background and white text when the corresponding input is checked */
-#student:checked + label[for="student"] {
+/* When selected */
+.role-option input:checked + .role-button {
   background-color: #4caf50;
   color: white;
   font-weight: bold;
-}
-
-#teacher:checked + label[for="teacher"] {
-  background-color: #4caf50;
-  color: white;
-  font-weight: bold;
+  border: 2px solid #388e3c;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -116,26 +114,47 @@ p {
   }
 }
 
-/* Hover effect for buttons */
-.role-selector .role-button:hover {
-  background-color: #f0f0f0;
-}
-
-/* Style for frames */
 .frame-content {
   display: none;
   margin-top: 20px;
 }
 
-/* Display the Student content when the student radio is checked */
-#student:checked ~ .student-frame {
-  display: block;
+/* Loading spinner */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
 }
 
-/* Display the Teacher content when the teacher radio is checked */
-#teacher:checked ~ .teacher-frame {
-  display: block;
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 8px;
 }
+
+.spinner-text {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 
 
