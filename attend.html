@@ -150,45 +150,52 @@
       color: white;
     }
 
+    .no-results {
+      text-align: center;
+      font-size: 16px;
+      color: #e74c3c;
+      margin-top: 20px;
+    }
+
     .bottom-nav {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 380px;
-  display: flex;
-  justify-content: space-around;
-  background: #000;
-  padding: 10px 0;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-}
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      justify-content: space-around;
+      background: #000;
+      padding: 10px 0;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-.bottom-nav a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 14px;
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
+    .bottom-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 14px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
 
-.bottom-nav a span:first-child {
-  font-size: 22px;
-}
+    .bottom-nav a span:first-child {
+      font-size: 22px;
+    }
 
-.bottom-nav a:hover {
-  opacity: 0.8;
-}
+    .bottom-nav a:hover {
+      opacity: 0.8;
+    }
 
-.bottom-nav .active {
-  color: #f05b6b;
-  font-weight: 700;
-  transform: scale(1.1);
-}
+    .bottom-nav .active {
+      color: #f05b6b;
+      font-weight: 700;
+      transform: scale(1.1);
+    }
 
   </style>
 </head>
@@ -198,12 +205,13 @@
       <div class="header">Class Attendance</div>
 
       <div class="search-bar">
-        <input type="text" placeholder="Search name of student" />
-        <button>🔍</button>
+        <input type="text" id="search-input" placeholder="Search name of student" />
+        <button id="search-btn">🔍</button>
       </div>
 
-      <div class="students-list">
-        <div class="student">
+      <div class="students-list" id="students-list">
+        <!-- Students list items will be added dynamically -->
+        <div class="student" data-name="Aaron Matthew Mercado">
           <div class="student-info">
             <div class="student-avatar">A</div>
             <div>
@@ -214,7 +222,7 @@
           <div class="status present">Present ✏️</div>
         </div>
 
-        <div class="student">
+        <div class="student" data-name="Ayrand Gunda">
           <div class="student-info">
             <div class="student-avatar" style="background-color: #e67e22;">A</div>
             <div>
@@ -225,7 +233,7 @@
           <div class="status absent">Absent ✏️</div>
         </div>
 
-        <div class="student">
+        <div class="student" data-name="Charlene Nikki Salisi">
           <div class="student-info">
             <div class="student-avatar">
               <img src="https://via.placeholder.com/40" alt="Student" />
@@ -238,7 +246,7 @@
           <div class="status present">Present ✏️</div>
         </div>
 
-        <div class="student">
+        <div class="student" data-name="Christian Jay Juarez">
           <div class="student-info">
             <div class="student-avatar">
               <img src="https://via.placeholder.com/40" alt="Student" />
@@ -248,9 +256,10 @@
               <div class="student-id">(Student I.D)</div>
             </div>
           </div>
+          <div class="status present">Present ✏️</div>
         </div>
 
-        <div class="student">
+        <div class="student" data-name="Clyde Errol del Valle">
           <div class="student-info">
             <div class="student-avatar" style="background-color: #8e44ad;">C</div>
             <div>
@@ -258,9 +267,10 @@
               <div class="student-id">(Student I.D)</div>
             </div>
           </div>
+          <div class="status absent">Absent ✏️</div>
         </div>
 
-        <div class="student">
+        <div class="student" data-name="David Jamil Esteban">
           <div class="student-info">
             <div class="student-avatar" style="background-color: #95a5a6;">D</div>
             <div>
@@ -268,9 +278,10 @@
               <div class="student-id">(Student I.D)</div>
             </div>
           </div>
+          <div class="status present">Present ✏️</div>
         </div>
 
-        <div class="student">
+        <div class="student" data-name="Ed Miguel Angeles">
           <div class="student-info">
             <div class="student-avatar" style="background-color: #27ae60;">E</div>
             <div>
@@ -278,9 +289,13 @@
               <div class="student-id">(Student I.D)</div>
             </div>
           </div>
+          <div class="status absent">Absent ✏️</div>
         </div>
 
       </div>
+
+      <!-- No results message will be displayed here -->
+      <div id="no-results" class="no-results" style="display: none;">No students found in the class</div>
     </div>
 
     <div class="bottom-nav">
@@ -288,7 +303,7 @@
           <span>⌂</span>
           <span>Home</span>
         </a>
-        <a href="task.html">
+        <a href="tasktc.html">
           <span>📋</span>
           <span>Tasks</span>
         </a>
@@ -296,22 +311,63 @@
           <span>✍️</span>
           <span>Attendance</span>
         </a>
-        <a href="#chat">
+        <a href="#">
           <span>💬</span>
           <span>Chat</span>
         </a>
       </div>
       
-  
+  </div>
 
   <script>
-    // For bottom nav active state
-    document.querySelectorAll('.bottom-nav a').forEach(link => {
-      link.addEventListener('click', function() {
-        document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
-        this.classList.add('active');
+    // Function to filter students based on search input
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+    const studentsList = document.getElementById('students-list');
+    const noResultsMessage = document.getElementById('no-results');
+
+    function filterStudents() {
+      const query = searchInput.value.toLowerCase();
+      let found = false;
+
+      // Get all student elements
+      const students = studentsList.querySelectorAll('.student');
+
+      // Loop through the students and filter based on name
+      students.forEach(student => {
+        const name = student.getAttribute('data-name').toLowerCase();
+        if (name.includes(query)) {
+          student.style.display = 'flex'; // Show matching student
+          found = true; // At least one match is found
+        } else {
+          student.style.display = 'none'; // Hide non-matching student
+        }
       });
-    });
-  </script
+
+      // Show or hide the no results message
+      if (found) {
+        noResultsMessage.style.display = 'none';
+      } else {
+        noResultsMessage.style.display = 'block';
+      }
+    }
+
+    // Listen for changes in the search input
+    searchInput.addEventListener('input', filterStudents);
+
+    // Optionally, use the search button click to trigger filtering
+    searchBtn.addEventListener('click', filterStudents);
+  </script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
